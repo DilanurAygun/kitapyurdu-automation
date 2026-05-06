@@ -8,7 +8,7 @@ Feature: Kitapyurdu Website Tests
 
   Scenario: NAV-02 Search for a book
     Given I open Kitapyurdu homepage
-    When I search for "Soygun"
+    When I search for "Biyografi"
     Then search results should be displayed
 
   Scenario: NAV-03 Navigate to Edebiyat category
@@ -18,25 +18,25 @@ Feature: Kitapyurdu Website Tests
 
   Scenario: PRICE-01 Book detail page shows price
     Given I open Kitapyurdu homepage
-    When I search for "Soygun"
+    When I search for "Biyografi"
     And I click on the first result
     Then the product price should be displayed
 
   Scenario: SORT-01 Sort results by price ascending
     Given I open Kitapyurdu homepage
-    When I search for "Soygun"
+    When I search for "Biyografi"
     And I sort by "Ucuzdan Pahalıya"
     Then results should be sorted by price ascending
 
   Scenario: CART-01 Add book to basket
     Given I open Kitapyurdu homepage
-    When I search for "Soygun"
+    When I search for "Biyografi"
     And I add the first available book to basket
     Then the basket count should increase
 
   Scenario: STOCK-01 In stock book has add to basket button
     Given I open Kitapyurdu homepage
-    When I search for "Soygun"
+    When I search for "Biyografi"
     And I click on the first result
     Then the product should show stock status
 
@@ -55,5 +55,5 @@ Feature: Kitapyurdu Website Tests
 
   Scenario: UI-01 Search results show product image, name and price
     Given I open Kitapyurdu homepage
-    When I search for "Soygun"
+    When I search for "Biyografi"
     Then each product card should display image, name and price
