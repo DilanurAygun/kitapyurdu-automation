@@ -17,7 +17,17 @@ public class HomePage extends BasePage {
 
     public HomePage(WebDriver driver) {
         super(driver);
-        driver.get("https://www.kitapyurdu.com/");
+        int attempts = 0;
+        while (attempts < 3) {
+            try {
+                driver.get("https://www.kitapyurdu.com/");
+                break;
+            } catch (Exception e) {
+                attempts++;
+                System.out.println("Homepage load attempt " + attempts + " failed, retrying...");
+                if (attempts == 3) throw e;
+            }
+        }
     }
 
     public String getTitle() {

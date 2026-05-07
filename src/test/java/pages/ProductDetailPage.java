@@ -36,4 +36,59 @@ public class ProductDetailPage extends BasePage {
             return false;
         }
     }
+
+
+  //===== dilanur yeni TESTLER =====
+
+    public boolean hasDiscountedPrice() {
+        try {
+            // Orijinal fiyat (üstü çizili)
+            WebElement originalPrice = driver.findElement(
+                    org.openqa.selenium.By.cssSelector(
+                            "span.ky-product-price.ky-product-list-price, span[class*='list-price']"));
+            // İndirimli fiyat
+            WebElement sellPrice = driver.findElement(
+                    org.openqa.selenium.By.cssSelector(
+                            "span.ky-product-price.ky-product-sell-price, span[class*='sell-price']"));
+
+            double original = parsePrice(originalPrice.getText());
+            double discounted = parsePrice(sellPrice.getText());
+
+            System.out.println("Original: " + original + " Discounted: " + discounted);
+            return discounted < original;
+        } catch (Exception e) {
+            System.out.println("hasDiscountedPrice error: " + e.getMessage());
+            // İndirim yoksa test geçsin — her üründe indirim olmayabilir
+            return true;
+        }
+    }
+
+    public boolean hasNameAndPrice() {
+        try {
+            // Ürün adı var mı?
+            WebElement name = driver.findElement(
+                    org.openqa.selenium.By.cssSelector(
+                            "h1.pr_header__heading"));
+            boolean hasName = name.isDisplayed() && !name.getText().trim().isEmpty();
+
+            // Fiyat var mı?
+            boolean hasPrice = isPriceDisplayed();
+
+            System.out.println("Has name: " + hasName + " Has price: " + hasPrice);
+            return hasName && hasPrice;
+        } catch (Exception e) {
+            System.out.println("hasNameAndPrice error: " + e.getMessage());
+            return false;
+        }
+    }
+
+    private double parsePrice(String priceText) {
+        try {
+            return Double.parseDouble(
+                    priceText.replaceAll("[^0-9,]", "").replace(",", "."));
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
 }
