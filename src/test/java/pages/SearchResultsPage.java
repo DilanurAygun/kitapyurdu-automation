@@ -42,10 +42,24 @@ public class SearchResultsPage extends BasePage {
                         By.cssSelector("div.ky-product a[class*='text-decoration-none']")
                 )
         );
-        ((org.openqa.selenium.JavascriptExecutor) driver)
-                .executeScript("arguments[0].scrollIntoView({block: 'center'});", firstLink);
+        highlightAndScroll(firstLink);
         ((org.openqa.selenium.JavascriptExecutor) driver)
                 .executeScript("arguments[0].click();", firstLink);
+    }
+
+    public void clickFirstDiscountedResult() {
+        wait.until(ExpectedConditions.visibilityOfAllElements(searchResults));
+        for (WebElement product : searchResults) {
+            List<WebElement> listPrice = product.findElements(By.cssSelector("span.ky-product-price.ky-product-list-price"));
+            if (!listPrice.isEmpty()) {
+                // İndirimli ürün bulundu! Resmine/Linkine tıkla
+                WebElement link = product.findElement(By.cssSelector("a[class*='text-decoration-none']"));
+                highlightAndScroll(link);
+                ((org.openqa.selenium.JavascriptExecutor) driver).executeScript("arguments[0].click();", link);
+                return;
+            }
+        }
+        throw new RuntimeException("Sayfada indirimli (ustu cizili fiyata sahip) urun bulunamadi!");
     }
 
     public void sortBy(String optionText) {
@@ -56,6 +70,27 @@ public class SearchResultsPage extends BasePage {
         // Sıralama sonrası eski elementin sayfadan silinmesini (staleness) ve yenisinin gelmesini bekle
         wait.until(ExpectedConditions.stalenessOf(firstItem));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.ky-product")));
+    }
+
+    public void filterByText(String text) {
+        try {
+            // "Sadece Stoktakiler" veya "Stokta Olanlar" gibi filtreleri bulmak icin jenerik xpath
+            WebElement filterElement = wait.until(ExpectedConditions.elementToBeClickable(
+                    org.openqa.selenium.By.xpath(
+                            "//label[contains(., '" + text + "')] | " +
+                            "//span[contains(., '" + text + "')] | " +
+                            "//a[contains(., '" + text + "')]"
+                    )
+            ));
+            highlightAndScroll(filterElement);
+            ((org.openqa.selenium.JavascriptExecutor) driver).executeScript("arguments[0].click();", filterElement);
+            
+            // Sayfanin filtrelenip yenilenmesi icin bekle
+            Thread.sleep(2000);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.ky-product")));
+        } catch (Exception e) {
+            System.out.println("Filtre tiklanamadi: " + text + " - Hata: " + e.getMessage());
+        }
     }
 
     public boolean isSortedByPriceAscending() {
@@ -104,8 +139,7 @@ public class SearchResultsPage extends BasePage {
         if (greenButtons.isEmpty()) {
             throw new RuntimeException("No available books to add to basket!");
         }
-        ((org.openqa.selenium.JavascriptExecutor) driver)
-                .executeScript("arguments[0].scrollIntoView({block: 'center'});", greenButtons.get(0));
+        highlightAndScroll(greenButtons.get(0));
         ((org.openqa.selenium.JavascriptExecutor) driver)
                 .executeScript("arguments[0].click();", greenButtons.get(0));
         // Sepete eklendiğine dair bir belirti beklemek daha sağlıklıdır (Örn: bildirim mesajı veya sepet sayısında artış)
@@ -257,8 +291,7 @@ public class SearchResultsPage extends BasePage {
         if (greenButtons.size() < 2) {
             throw new RuntimeException("Not enough available books!");
         }
-        ((org.openqa.selenium.JavascriptExecutor) driver)
-                .executeScript("arguments[0].scrollIntoView({block: 'center'});", greenButtons.get(1));
+        highlightAndScroll(greenButtons.get(1));
         ((org.openqa.selenium.JavascriptExecutor) driver)
                 .executeScript("arguments[0].click();", greenButtons.get(1));
         try { Thread.sleep(2000); } catch (InterruptedException e) { Thread.currentThread().interrupt(); }

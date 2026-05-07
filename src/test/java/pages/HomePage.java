@@ -21,12 +21,26 @@ public class HomePage extends BasePage {
         while (attempts < 3) {
             try {
                 driver.get("https://www.kitapyurdu.com/");
+                dismissCookiePopup();
                 break;
             } catch (Exception e) {
                 attempts++;
                 System.out.println("Homepage load attempt " + attempts + " failed, retrying...");
                 if (attempts == 3) throw e;
             }
+        }
+    }
+
+    private void dismissCookiePopup() {
+        try {
+            // Cookie popup'in hic gorunmemesi ve bekleme yapmamasi icin CSS enjekte ediyoruz.
+            // Bu sayede popup yuklense bile sayfada gorunmez ve hicbir seye engel olmaz.
+            org.openqa.selenium.JavascriptExecutor js = (org.openqa.selenium.JavascriptExecutor) driver;
+            String css = "#cookiescript_injected { display: none !important; z-index: -9999 !important; }";
+            String script = "var style = document.createElement('style'); style.innerHTML = '" + css + "'; document.head.appendChild(style);";
+            js.executeScript(script);
+        } catch (Exception e) {
+            System.out.println("CSS Injection for cookie popup failed: " + e.getMessage());
         }
     }
 
@@ -46,6 +60,7 @@ public class HomePage extends BasePage {
 
     public void searchFor(String keyword) {
         wait.until(ExpectedConditions.elementToBeClickable(searchBox));
+        highlightAndScroll(searchBox);
         searchBox.clear();
         searchBox.sendKeys(keyword);
         searchBox.sendKeys(Keys.ENTER);
@@ -59,6 +74,7 @@ public class HomePage extends BasePage {
         for (WebElement link : allLinks) {
             try {
                 if (link.getText().trim().equalsIgnoreCase(categoryName)) {
+                    highlightAndScroll(link);
                     link.click();
                     return;
                 }
