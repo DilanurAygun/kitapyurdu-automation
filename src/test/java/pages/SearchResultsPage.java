@@ -48,10 +48,12 @@ public class SearchResultsPage extends BasePage {
 
     public void sortBy(String optionText) {
         wait.until(ExpectedConditions.elementToBeClickable(sortDropdown));
+        WebElement firstItem = driver.findElement(By.cssSelector("div.ky-product"));
         Select select = new Select(sortDropdown);
         select.selectByVisibleText(optionText);
-        // Sıralama sonrası sayfanın yenilenmesini bekle
-        try { Thread.sleep(2000); } catch (InterruptedException e) { Thread.currentThread().interrupt(); }
+        // Sıralama sonrası eski elementin sayfadan silinmesini (staleness) ve yenisinin gelmesini bekle
+        wait.until(ExpectedConditions.stalenessOf(firstItem));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.ky-product")));
     }
 
     public boolean isSortedByPriceAscending() {
@@ -104,7 +106,9 @@ public class SearchResultsPage extends BasePage {
                 .executeScript("arguments[0].scrollIntoView({block: 'center'});", greenButtons.get(0));
         ((org.openqa.selenium.JavascriptExecutor) driver)
                 .executeScript("arguments[0].click();", greenButtons.get(0));
-        try { Thread.sleep(2000); } catch (InterruptedException e) { Thread.currentThread().interrupt(); }
+        // Sepete eklendiğine dair bir belirti beklemek daha sağlıklıdır (Örn: bildirim mesajı veya sepet sayısında artış)
+        // Şimdilik sadece sepet elementinin tıklanabilir/görünür olmasını bekleyerek explicit wait kullanıyoruz
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("cart-items")));
     }
 
     public boolean noResultsMessageDisplayed() {

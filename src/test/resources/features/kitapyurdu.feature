@@ -6,10 +6,16 @@ Feature: Kitapyurdu Website Tests
     Given I open Kitapyurdu homepage
     Then the page title should contain "Kitapyurdu"
 
-  Scenario: NAV-02 Search for a book
+  Scenario Outline: NAV-02 Search for a book
     Given I open Kitapyurdu homepage
-    When I search for "Biyografi"
+    When I search for "<keyword>"
     Then search results should be displayed
+
+    Examples:
+      | keyword   |
+      | Biyografi |
+      | Roman     |
+      | Tarih     |
 
   Scenario: NAV-03 Navigate to Edebiyat category
     Given I open Kitapyurdu homepage
