@@ -57,3 +57,50 @@ Feature: Kitapyurdu Website Tests
     Given I open Kitapyurdu homepage
     When I search for "Biyografi"
     Then each product card should display image, name and price
+
+
+    # ===== Dilanur yeni TESTLER =====
+
+  Scenario: PRICE-02 Discounted price is correctly displayed
+    Given I open Kitapyurdu homepage
+    When I search for "Biyografi"
+    And I click on the first result
+    Then the discounted price should be less than original price
+
+
+  Scenario: CART-02 Basket validation with two books
+    Given I open Kitapyurdu homepage
+    When I search for "Biyografi"
+    And I collect first book name and price from search results
+    And I add the first available book to basket
+    And I collect second book name and price from search results
+    And I add the second available book to basket
+    And I navigate to basket page
+    Then basket should contain the correct books
+    And basket item prices should match search result prices
+    And basket total should equal sum of item prices
+
+  Scenario: CART-03 Adding two books increases basket count to 2
+    Given I open Kitapyurdu homepage
+    When I search for "Biyografi"
+    And I add the first available book to basket
+    And I add the second available book to basket
+    Then the basket count should be 2
+
+  Scenario: FILTER-01 Price filter returns products in range
+    Given I open Kitapyurdu homepage
+    When I search for "Biyografi"
+    And I sort by "Ucuzdan Pahalıya"
+    Then all product prices should be valid numbers
+
+
+  Scenario: DETAIL-01 Product detail page shows complete information
+    Given I open Kitapyurdu homepage
+    When I search for "Biyografi"
+    And I click on the first result
+    Then the product detail page should show name and price
+
+  Scenario: NEG-03 Out of stock book cannot be added to basket
+    Given I open Kitapyurdu homepage
+    When I search for "Biyografi"
+    Then out of stock books should not have add to basket button

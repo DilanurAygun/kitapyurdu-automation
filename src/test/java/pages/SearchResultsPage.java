@@ -19,6 +19,8 @@ public class SearchResultsPage extends BasePage {
     @FindBy(css = "div.ky-product button[data-action='add-to-cart']")
     private List<WebElement> addToCartButtons;
 
+    private String firstBookNameForComparison = "";
+
     public SearchResultsPage(WebDriver driver) {
         super(driver);
     }
@@ -107,6 +109,15 @@ public class SearchResultsPage extends BasePage {
         try { Thread.sleep(2000); } catch (InterruptedException e) { Thread.currentThread().interrupt(); }
     }
 
+    public void waitForSearchResults() {
+        try {
+            wait.until(ExpectedConditions.visibilityOfAllElements(searchResults));
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
+
     public boolean noResultsMessageDisplayed() {
         try {
             WebElement msg = wait.until(ExpectedConditions.visibilityOfElementLocated(
@@ -165,6 +176,131 @@ public class SearchResultsPage extends BasePage {
         } catch (Exception e) {
             System.out.println("UI check error: " + e.getMessage());
             return false;
+        }
+    }
+
+    //dilanur yeni test//
+
+    public String getFirstBookName() {
+        wait.until(ExpectedConditions.visibilityOfAllElements(searchResults));
+        List<WebElement> names = driver.findElements(
+                By.cssSelector("span.ky-product-title"));
+
+        for (WebElement nameElement : names) {
+            String name = nameElement.getText().trim();
+            if (!name.isEmpty()) {
+                System.out.println("First book name: " + name);
+                return name;
+            }
+        }
+        return "";
+    }
+
+    public String getSecondBookName() {
+        wait.until(ExpectedConditions.visibilityOfAllElements(searchResults));
+        List<WebElement> names = driver.findElements(
+                By.cssSelector("span.ky-product-title"));
+
+        int count = 0;
+        for (WebElement nameElement : names) {
+            String name = nameElement.getText().trim();
+            if (!name.isEmpty()) {
+                count++;
+                if (count == 2) {
+                    System.out.println("Second book name: " + name);
+                    return name;
+                }
+            }
+        }
+        return "";
+    }
+
+    public double getFirstBookPrice() {
+        wait.until(ExpectedConditions.visibilityOfAllElements(searchResults));
+        List<WebElement> prices = driver.findElements(
+                By.cssSelector("span.ky-product-price.ky-product-sell-price"));
+        double price = parsePrice(prices.get(0).getText());
+        System.out.println("First book price: " + price);
+        return price;
+    }
+
+    public double getSecondBookPrice() {
+        wait.until(ExpectedConditions.visibilityOfAllElements(searchResults));
+        List<WebElement> prices = driver.findElements(
+                By.cssSelector("span.ky-product-price.ky-product-sell-price"));
+        double price = parsePrice(prices.get(1).getText());
+        System.out.println("Second book price: " + price);
+        return price;
+    }
+
+    public double getBasketTotal() {
+        try {
+            WebElement total = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                    By.cssSelector("span.cart-total, div[class*='cart-total'], span[class*='total-price']")));
+            String text = total.getText().trim();
+            System.out.println("Basket total text: " + text);
+            return parsePrice(text);
+        } catch (Exception e) {
+            System.out.println("getBasketTotal error: " + e.getMessage());
+            return 0;
+        }
+    }
+
+    public void addSecondAvailableBookToBasket() {
+        wait.until(ExpectedConditions.visibilityOfAllElements(searchResults));
+        List<WebElement> greenButtons = driver.findElements(
+                By.cssSelector("div.ky-product button.ky-btn-primary[data-action='add-to-cart']"));
+        if (greenButtons.size() < 2) {
+            throw new RuntimeException("Not enough available books!");
+        }
+        ((org.openqa.selenium.JavascriptExecutor) driver)
+                .executeScript("arguments[0].scrollIntoView({block: 'center'});", greenButtons.get(1));
+        ((org.openqa.selenium.JavascriptExecutor) driver)
+                .executeScript("arguments[0].click();", greenButtons.get(1));
+        try { Thread.sleep(2000); } catch (InterruptedException e) { Thread.currentThread().interrupt(); }
+    }
+
+    public boolean allPricesAreValidNumbers() {
+        try {
+            wait.until(ExpectedConditions.visibilityOfAllElements(searchResults));
+            List<WebElement> prices = driver.findElements(
+                    By.cssSelector("span.ky-product-price.ky-product-sell-price"));
+            if (prices.isEmpty()) return false;
+            for (WebElement price : prices) {
+                String text = price.getText().trim();
+                if (text.isEmpty()) continue;
+                double value = parsePrice(text);
+                if (value <= 0) {
+                    System.out.println("Invalid price found: " + text);
+                    return false;
+                }
+            }
+            return true;
+        } catch (Exception e) {
+            System.out.println("allPricesAreValidNumbers error: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean outOfStockBooksHaveNoAddToBasketButton() {
+        try {
+            wait.until(ExpectedConditions.visibilityOfAllElements(searchResults));
+            // Gri "Ürünü İncele" butonu olan kartlar stokta yok demektir
+            List<WebElement> outOfStockCards = driver.findElements(
+                    By.cssSelector("div.ky-product button.ky-btn-default[data-action='add-to-cart']"));
+            // Bu kartlarda yeşil buton olmamalı
+            for (WebElement card : outOfStockCards) {
+                List<WebElement> greenBtn = card.findElements(
+                        By.cssSelector("button.ky-btn-primary[data-action='add-to-cart']"));
+                if (!greenBtn.isEmpty()) {
+                    System.out.println("Out of stock book has add to basket button!");
+                    return false;
+                }
+            }
+            return true;
+        } catch (Exception e) {
+            System.out.println("outOfStockCheck error: " + e.getMessage());
+            return true;
         }
     }
 }
