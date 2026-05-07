@@ -1,0 +1,581 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title></title>
+<link rel="apple-touch-icon" href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@b00a2d0486596e73dd7326beacf352c639623a0e/commons/img/logo.png">
+<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@b00a2d0486596e73dd7326beacf352c639623a0e/commons/img/logo.png">
+<link href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@ce8b10435bcbae260c334c0d0c6b61d2c19b6168/spark/css/spark-style.css" rel="stylesheet" />
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@7cc78ce/spark/js/jsontree.js"></script>
+<style type="text/css"></style></head><body class="spa bdd-report standard">
+  <div class="app">
+    <div class="layout">
+<div class="header navbar">
+<div class="vheader">
+<div class="nav-logo">
+<a href="#">
+<div class="logo" style="background-image: url('https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@b00a2d0486596e73dd7326beacf352c639623a0e/commons/img/logo.png')"></div>
+</a>
+</div>
+<ul class="nav-left">
+<li class="search-box">
+<a class="search-toggle" href="#">
+<i class="search-icon fa fa-search"></i>
+<i class="search-icon-close fa fa-close"></i>
+</a>
+</li>
+<li class="search-input"><input id="search-tests" class="form-control" type="text" placeholder="Search..."></li>
+</ul>
+<ul class="nav-right">
+<li class="m-r-10">
+<a href="#"><span class="badge badge-primary"></span></a>
+</li>
+<li class="m-r-10">
+<a href="#"><span class="badge badge-primary">May 6, 2026 02:41:29 PM</span></a>
+</li>
+</ul>
+</div>
+</div><div class="side-nav">
+<div class="side-nav-inner">
+<ul class="side-nav-menu">
+<li class="nav-item dropdown" onclick="toggleView('test-view')">
+<a id="nav-test" class="dropdown-toggle" href="#">
+<span class="ico"><i class="fa fa-list"></i></span>
+</a>
+</li>
+<li class="nav-item dropdown" onclick="toggleView('dashboard-view')">
+<a id="nav-dashboard" class="dropdown-toggle" href="#">
+<span class="ico"><i class="fa fa-bar-chart"></i></span>
+</a>
+</li>
+</ul>
+</div>
+</div>      <div class="vcontainer">
+        <div class="main-content">
+<div class="test-wrapper row view test-view">
+  <div class="test-list">
+    <div class="test-list-tools">
+<ul class="tools pull-left">
+<li><a href="#"><span class="font-size-14">Tests</span></a></li>
+</ul>
+<ul class="tools text-right">
+<li class="dropdown">
+<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-exclamation-circle"></i></a>
+<ul id="status-toggle" class="dropdown-menu dropdown-md p-v-0">
+<a class="dropdown-item" status="pass" href="#"><span>Pass</span><span class="status success"></span></a>
+<div class="dropdown-divider"></div>
+<a status="clear" class="dropdown-item" href="#"><span>Clear</span><span class="pull-right"><i class="fa fa-close"></i></span></a>
+</ul>
+</li>
+</ul>
+</div>    <div class="test-list-wrapper scrollable">
+      <ul class="test-list-item">
+        <li class="test-item"  status="pass" test-id="1"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Kitapyurdu Website Tests</p>
+            <p class="text-sm">
+              <span>2:41:30 PM</span> / <span>00:01:45:820</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">Kitapyurdu Website Tests</h5>
+<span class='badge badge-success'>05.06.2026 2:41:30 PM</span>
+<span class='badge badge-danger'>05.06.2026 2:43:15 PM</span>
+<span class='badge badge-default'>00:01:45:820</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=1</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+<div class="m-t-10 m-l-5"></div>
+</div>
+</div>
+<div class="accordion mt-4">
+  <div class="card">
+    <div class="card-header" role="tab">
+      <div class="card-title">
+        <div class="node" id="2"><span class="badge log pass-bg mr-2">Pass</span>NAV-01 Homepage loads successfully</div>
+      </div>
+    </div>
+        <div class="collapse">
+          <div class="card-body">
+              <div class="step pass-bg" title="steps.NavigationSteps.iOpenHomepage()">
+                <span>Given I open Kitapyurdu homepage</span>
+      <div>
+      </div>
+              </div>
+              <div class="step pass-bg" title="steps.NavigationSteps.pageTitleShouldContain(java.lang.String)">
+                <span>Then the page title should contain "Kitapyurdu"</span>
+      <div>
+      </div>
+              </div>
+          </div>
+        </div>
+  </div>
+  <div class="card">
+    <div class="card-header" role="tab">
+      <div class="card-title">
+        <div class="node" id="9"><span class="badge log pass-bg mr-2">Pass</span>NAV-02 Search for a book</div>
+      </div>
+    </div>
+        <div class="scenario_outline collapse">
+            <div class="card-body l1">
+              <div class="card-header">
+                <div class="card-title outline-child">
+                  <div class="node" id="10"><span class="badge log pass-bg mr-2">Pass</span>NAV-02 Search for a book</div>
+                </div>
+              </div>
+              <div class="card-body mt-3 collapse">
+                  <div class="step pass-bg">
+                    <span>Given I open Kitapyurdu homepage</span>
+      <div>
+      </div>
+                  </div>
+                  <div class="step pass-bg">
+                    <span>When I search for "Biyografi"</span>
+      <div>
+      </div>
+                  </div>
+                  <div class="step pass-bg">
+                    <span>Then search results should be displayed</span>
+      <div>
+      </div>
+                  </div>
+              </div>
+            </div>
+            <div class="card-body l1">
+              <div class="card-header">
+                <div class="card-title outline-child">
+                  <div class="node" id="19"><span class="badge log pass-bg mr-2">Pass</span>NAV-02 Search for a book</div>
+                </div>
+              </div>
+              <div class="card-body mt-3 collapse">
+                  <div class="step pass-bg">
+                    <span>Given I open Kitapyurdu homepage</span>
+      <div>
+      </div>
+                  </div>
+                  <div class="step pass-bg">
+                    <span>When I search for "Roman"</span>
+      <div>
+      </div>
+                  </div>
+                  <div class="step pass-bg">
+                    <span>Then search results should be displayed</span>
+      <div>
+      </div>
+                  </div>
+              </div>
+            </div>
+            <div class="card-body l1">
+              <div class="card-header">
+                <div class="card-title outline-child">
+                  <div class="node" id="28"><span class="badge log pass-bg mr-2">Pass</span>NAV-02 Search for a book</div>
+                </div>
+              </div>
+              <div class="card-body mt-3 collapse">
+                  <div class="step pass-bg">
+                    <span>Given I open Kitapyurdu homepage</span>
+      <div>
+      </div>
+                  </div>
+                  <div class="step pass-bg">
+                    <span>When I search for "Tarih"</span>
+      <div>
+      </div>
+                  </div>
+                  <div class="step pass-bg">
+                    <span>Then search results should be displayed</span>
+      <div>
+      </div>
+                  </div>
+              </div>
+            </div>
+        </div>
+  </div>
+  <div class="card">
+    <div class="card-header" role="tab">
+      <div class="card-title">
+        <div class="node" id="37"><span class="badge log pass-bg mr-2">Pass</span>NAV-03 Navigate to Edebiyat category</div>
+      </div>
+    </div>
+        <div class="collapse">
+          <div class="card-body">
+              <div class="step pass-bg" title="steps.NavigationSteps.iOpenHomepage()">
+                <span>Given I open Kitapyurdu homepage</span>
+      <div>
+      </div>
+              </div>
+              <div class="step pass-bg" title="steps.NavigationSteps.iClickOnCategory(java.lang.String)">
+                <span>When I click on "Edebiyat" category</span>
+      <div>
+      </div>
+              </div>
+              <div class="step pass-bg" title="steps.NavigationSteps.categoryPageShouldLoad()">
+                <span>Then the category page should load</span>
+      <div>
+      </div>
+              </div>
+          </div>
+        </div>
+  </div>
+  <div class="card">
+    <div class="card-header" role="tab">
+      <div class="card-title">
+        <div class="node" id="46"><span class="badge log pass-bg mr-2">Pass</span>PRICE-01 Book detail page shows price</div>
+      </div>
+    </div>
+        <div class="collapse">
+          <div class="card-body">
+              <div class="step pass-bg" title="steps.NavigationSteps.iOpenHomepage()">
+                <span>Given I open Kitapyurdu homepage</span>
+      <div>
+      </div>
+              </div>
+              <div class="step pass-bg" title="steps.SearchSteps.iSearchFor(java.lang.String)">
+                <span>When I search for "Biyografi"</span>
+      <div>
+      </div>
+              </div>
+              <div class="step pass-bg" title="steps.SearchSteps.iClickOnFirstResult()">
+                <span>And I click on the first result</span>
+      <div>
+      </div>
+              </div>
+              <div class="step pass-bg" title="steps.SearchSteps.productPriceShouldBeDisplayed()">
+                <span>Then the product price should be displayed</span>
+      <div>
+      </div>
+              </div>
+          </div>
+        </div>
+  </div>
+  <div class="card">
+    <div class="card-header" role="tab">
+      <div class="card-title">
+        <div class="node" id="57"><span class="badge log pass-bg mr-2">Pass</span>SORT-01 Sort results by price ascending</div>
+      </div>
+    </div>
+        <div class="collapse">
+          <div class="card-body">
+              <div class="step pass-bg" title="steps.NavigationSteps.iOpenHomepage()">
+                <span>Given I open Kitapyurdu homepage</span>
+      <div>
+      </div>
+              </div>
+              <div class="step pass-bg" title="steps.SearchSteps.iSearchFor(java.lang.String)">
+                <span>When I search for "Biyografi"</span>
+      <div>
+      </div>
+              </div>
+              <div class="step pass-bg" title="steps.SearchSteps.iSortBy(java.lang.String)">
+                <span>And I sort by "Ucuzdan Pahalıya"</span>
+      <div>
+      </div>
+              </div>
+              <div class="step pass-bg" title="steps.SearchSteps.resultsShouldBeSortedByPriceAscending()">
+                <span>Then results should be sorted by price ascending</span>
+      <div>
+      </div>
+              </div>
+          </div>
+        </div>
+  </div>
+  <div class="card">
+    <div class="card-header" role="tab">
+      <div class="card-title">
+        <div class="node" id="68"><span class="badge log pass-bg mr-2">Pass</span>CART-01 Add book to basket</div>
+      </div>
+    </div>
+        <div class="collapse">
+          <div class="card-body">
+              <div class="step pass-bg" title="steps.NavigationSteps.iOpenHomepage()">
+                <span>Given I open Kitapyurdu homepage</span>
+      <div>
+      </div>
+              </div>
+              <div class="step pass-bg" title="steps.SearchSteps.iSearchFor(java.lang.String)">
+                <span>When I search for "Biyografi"</span>
+      <div>
+      </div>
+              </div>
+              <div class="step pass-bg" title="steps.SearchSteps.iAddFirstAvailableBookToBasket()">
+                <span>And I add the first available book to basket</span>
+      <div>
+      </div>
+              </div>
+              <div class="step pass-bg" title="steps.SearchSteps.basketCountShouldIncrease()">
+                <span>Then the basket count should increase</span>
+      <div>
+      </div>
+              </div>
+          </div>
+        </div>
+  </div>
+  <div class="card">
+    <div class="card-header" role="tab">
+      <div class="card-title">
+        <div class="node" id="79"><span class="badge log pass-bg mr-2">Pass</span>STOCK-01 In stock book has add to basket button</div>
+      </div>
+    </div>
+        <div class="collapse">
+          <div class="card-body">
+              <div class="step pass-bg" title="steps.NavigationSteps.iOpenHomepage()">
+                <span>Given I open Kitapyurdu homepage</span>
+      <div>
+      </div>
+              </div>
+              <div class="step pass-bg" title="steps.SearchSteps.iSearchFor(java.lang.String)">
+                <span>When I search for "Biyografi"</span>
+      <div>
+      </div>
+              </div>
+              <div class="step pass-bg" title="steps.SearchSteps.iClickOnFirstResult()">
+                <span>And I click on the first result</span>
+      <div>
+      </div>
+              </div>
+              <div class="step pass-bg" title="steps.SearchSteps.productShouldShowStockStatus()">
+                <span>Then the product should show stock status</span>
+      <div>
+      </div>
+              </div>
+          </div>
+        </div>
+  </div>
+  <div class="card">
+    <div class="card-header" role="tab">
+      <div class="card-title">
+        <div class="node" id="90"><span class="badge log pass-bg mr-2">Pass</span>NEG-01 Search with invalid keyword shows no results</div>
+      </div>
+    </div>
+        <div class="collapse">
+          <div class="card-body">
+              <div class="step pass-bg" title="steps.NavigationSteps.iOpenHomepage()">
+                <span>Given I open Kitapyurdu homepage</span>
+      <div>
+      </div>
+              </div>
+              <div class="step pass-bg" title="steps.SearchSteps.iSearchFor(java.lang.String)">
+                <span>When I search for "xyzxyzxyz123abc"</span>
+      <div>
+      </div>
+              </div>
+              <div class="step pass-bg" title="steps.SearchSteps.noResultsMessageShouldBeDisplayed()">
+                <span>Then no results message should be displayed</span>
+      <div>
+      </div>
+              </div>
+          </div>
+        </div>
+  </div>
+  <div class="card">
+    <div class="card-header" role="tab">
+      <div class="card-title">
+        <div class="node" id="99"><span class="badge log pass-bg mr-2">Pass</span>NEG-02 Empty search does not crash</div>
+      </div>
+    </div>
+        <div class="collapse">
+          <div class="card-body">
+              <div class="step pass-bg" title="steps.NavigationSteps.iOpenHomepage()">
+                <span>Given I open Kitapyurdu homepage</span>
+      <div>
+      </div>
+              </div>
+              <div class="step pass-bg" title="steps.SearchSteps.iSearchFor(java.lang.String)">
+                <span>When I search for ""</span>
+      <div>
+      </div>
+              </div>
+              <div class="step pass-bg" title="steps.SearchSteps.pageShouldStillBeFunctional()">
+                <span>Then the page should still be functional</span>
+      <div>
+      </div>
+              </div>
+          </div>
+        </div>
+  </div>
+  <div class="card">
+    <div class="card-header" role="tab">
+      <div class="card-title">
+        <div class="node" id="108"><span class="badge log pass-bg mr-2">Pass</span>UI-01 Search results show product image, name and price</div>
+      </div>
+    </div>
+        <div class="collapse">
+          <div class="card-body">
+              <div class="step pass-bg" title="steps.NavigationSteps.iOpenHomepage()">
+                <span>Given I open Kitapyurdu homepage</span>
+      <div>
+      </div>
+              </div>
+              <div class="step pass-bg" title="steps.SearchSteps.iSearchFor(java.lang.String)">
+                <span>When I search for "Biyografi"</span>
+      <div>
+      </div>
+              </div>
+              <div class="step pass-bg" title="steps.SearchSteps.eachProductCardShouldDisplayUIElements()">
+                <span>Then each product card should display image, name and price</span>
+      <div>
+      </div>
+              </div>
+          </div>
+        </div>
+  </div>
+</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+<div class="test-content scrollable">
+<div class="test-content-tools">
+<ul><li><a class="back-to-test" href="#"><i class="fa fa-arrow-left"></i></a></li></ul>
+</div>
+<div class="test-content-detail"><div class="detail-body"></div></div>
+</div></div>
+<div class="container-fluid p-4 view dashboard-view">
+<div class="row">
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0">Started</p>
+<h3>May 6, 2026 02:41:29 PM</h3>
+</div></div>
+</div>
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0">Ended</p>
+<h3>May 6, 2026 02:43:16 PM</h3>
+</div></div>
+</div>
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0 text-pass">Features Passed</p>
+<h3>1</h3>
+</div></div>
+</div>
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0 text-fail">Features Failed</p>
+<h3>0</h3>
+</div></div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-4">
+<div class="card">
+<div class="card-header">
+<h6 class="card-title">Features</h6>
+</div>
+<div class="card-body">
+<div class="">
+<canvas id='parent-analysis' width='115' height='90'></canvas>
+</div>
+</div>
+<div class="card-footer">
+<div><small data-tooltip='100%'>
+<b>1</b> features passed
+</small>
+</div>
+<div>
+<small data-tooltip='0%'><b>0</b> features failed,
+<b>0</b> skipped, <b data-tooltip='0%'>0</b> others
+</small>
+</div>
+</div>
+</div>
+</div>
+<div class="col-md-4">
+<div class="card">
+<div class="card-header">
+<h6 class="card-title">Scenarios</h6>
+</div>
+<div class="card-body">
+<div class="">
+<canvas id='child-analysis' width='115' height='90'></canvas>
+</div>
+</div>
+<div class="card-footer">
+<div><small data-tooltip='100%'><b>12</b> scenarios passed</small></div>
+<div>
+<small data-tooltip='0%'><b>0</b> scenarios failed,
+<b>0</b> skipped, <b data-tooltip='%'>0</b> others
+</small>
+</div>
+</div>
+</div>
+</div>
+<div class="col-md-4">
+<div class="card">
+<div class="card-header">
+<h6 class="card-title">Steps</h6>
+</div>
+<div class="card-body">
+<div class="">
+<canvas id='grandchild-analysis' width='115' height='90'></canvas>
+</div>
+</div>
+<div class="card-footer">
+<div><small data-tooltip='100%'><b>39</b> steps passed</small></div>
+<div>
+<small data-tooltip='0%'><b>0</b> steps failed,
+<b>0</b> skipped, <b data-tooltip='%'>0</b> others
+</small>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><div class="col-md-12">
+<div class="card"><div class="card-header"><p>Timeline</p></div>
+<div class="card-body pt-0"><div>
+<canvas id="timeline" height="120"></canvas>
+</div></div>
+</div>
+</div></div>
+<script>
+var timeline = {
+"Kitapyurdu Website Tests":105.82
+};
+</script>
+<div class="row">
+</div>
+</div>
+<script>
+var statusGroup = {
+parentCount: 5,
+passParent: 1,
+failParent: 0,
+warningParent: 0,
+skipParent: 0,
+childCount: 5,
+passChild: 12,
+failChild: 0,
+warningChild: 0,
+skipChild: 0,
+infoChild: 0,
+grandChildCount: 5,
+passGrandChild: 39,
+failGrandChild: 0,
+warningGrandChild: 0,
+skipGrandChild: 0,
+infoGrandChild: 0,
+eventsCount: 5,
+};
+</script>        </div>
+      </div>
+    </div>
+  </div>
+<script src="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@ce8b10435bcbae260c334c0d0c6b61d2c19b6168/spark/js/spark-script.js"></script>
+<script type="text/javascript"></script></body>
+</html>

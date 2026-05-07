@@ -1,6 +1,7 @@
 package steps;
 
 import io.cucumber.java.After;
+import io.cucumber.java.AfterStep;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import org.openqa.selenium.OutputType;
@@ -27,6 +28,16 @@ public class Hooks {
             Thread.sleep(500);
         } catch (Exception e) {
             System.out.println("No cookie popup: " + e.getMessage());
+        }
+    }
+
+    @AfterStep
+    public void afterStep() {
+        // Sunum esnasında adımların daha net görünmesi için her adımdan sonra yarım saniye (500ms) bekleme eklendi
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 
