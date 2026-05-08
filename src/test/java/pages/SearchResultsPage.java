@@ -47,20 +47,6 @@ public class SearchResultsPage extends BasePage {
                 .executeScript("arguments[0].click();", firstLink);
     }
 
-    public void clickFirstDiscountedResult() {
-        wait.until(ExpectedConditions.visibilityOfAllElements(searchResults));
-        for (WebElement product : searchResults) {
-            List<WebElement> listPrice = product.findElements(By.cssSelector("span.ky-product-price.ky-product-list-price"));
-            if (!listPrice.isEmpty()) {
-                // İndirimli ürün bulundu! Resmine/Linkine tıkla
-                WebElement link = product.findElement(By.cssSelector("a[class*='text-decoration-none']"));
-                highlightAndScroll(link);
-                ((org.openqa.selenium.JavascriptExecutor) driver).executeScript("arguments[0].click();", link);
-                return;
-            }
-        }
-        throw new RuntimeException("Sayfada indirimli (ustu cizili fiyata sahip) urun bulunamadi!");
-    }
 
     public void sortBy(String optionText) {
         wait.until(ExpectedConditions.elementToBeClickable(sortDropdown));

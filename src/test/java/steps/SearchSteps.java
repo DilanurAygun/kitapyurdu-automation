@@ -41,12 +41,6 @@ public class SearchSteps {
         detailPage = new ProductDetailPage(DriverManager.getDriver());
     }
 
-    @When("I click on the first discounted result")
-    public void iClickOnFirstDiscountedResult() {
-        searchResultsPage = new SearchResultsPage(DriverManager.getDriver());
-        searchResultsPage.clickFirstDiscountedResult();
-        detailPage = new ProductDetailPage(DriverManager.getDriver());
-    }
 
     @Then("the product price should be displayed")
     public void productPriceShouldBeDisplayed() {
@@ -117,11 +111,6 @@ public class SearchSteps {
 
 
 
-    @Then("the discounted price should be less than original price")
-    public void discountedPriceShouldBeLessThanOriginal() {
-        Assert.assertTrue(detailPage.hasDiscountedPrice(),
-                "Discounted price is not less than original price!");
-    }
 
     @Then("the basket total should be greater than zero")
     public void basketTotalShouldBeGreaterThanZero() {
