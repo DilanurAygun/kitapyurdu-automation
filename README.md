@@ -70,7 +70,6 @@ Testler tamamen gerçek bir kullanıcının siteye girip ürün aramasından sep
 ### 4. Ürün Detay Sayfası
 *   **DETAIL-01:** Bir kitaba tıklandığında ürün sayfasının tam yüklendiği ve isim/fiyat barındırdığı görülür.
 *   **PRICE-01:** Ürün sayfasındaki fiyatın doğru gösterildiği doğrulanır.
-*   **PRICE-02:** Arama sonuçlarından özellikle **İndirimli (Üstü çizili fiyata sahip)** bir ürün bulunur, sayfasına gidilir ve indirimli fiyatın orijinal fiyattan matematiksel olarak daha küçük olduğu ispatlanır.
 
 ### 5. Sepet İşlemleri (Cart)
 *   **NEG-03:** "Tükendi" durumundaki kitapların sepet butonunun kapalı olduğu doğrulanır.

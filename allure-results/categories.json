@@ -1,0 +1,10 @@
+[
+  {
+    "name": "Gercek Sistem Aciklari (Bugs)",
+    "matchedStatuses": ["failed"]
+  },
+  {
+    "name": "Bozuk/Eksik Kod Hatalari",
+    "matchedStatuses": ["broken"]
+  }
+]
