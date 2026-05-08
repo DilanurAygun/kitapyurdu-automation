@@ -1,0 +1,6 @@
+{
+  "name": "Maven",
+  "type": "maven",
+  "buildName": "Kitapyurdu-Tests-Run",
+  "buildUrl": "http://localhost"
+}

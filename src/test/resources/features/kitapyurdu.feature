@@ -55,10 +55,11 @@ Feature: Kitapyurdu Website Tests
     And I click on the first result
     Then the product should show stock status
 
+  @test
   Scenario: SORT-01 Sort results by price ascending
     Given I open Kitapyurdu homepage
     When I search for "Biyografi"
-    And I filter by "Stoktakiler"
+    And I filter by in stock items
     And I sort by "Ucuzdan Pahalıya"
     Then results should be sorted by price ascending
 
@@ -104,6 +105,7 @@ Feature: Kitapyurdu Website Tests
     And I add the first available book to basket
     And I add the second available book to basket
     Then the basket count should be 2
+
 
   Scenario: CART-02 Basket validation with two books
     Given I open Kitapyurdu homepage

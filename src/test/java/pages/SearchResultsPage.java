@@ -62,6 +62,22 @@ public class SearchResultsPage extends BasePage {
         throw new RuntimeException("Sayfada indirimli (ustu cizili fiyata sahip) urun bulunamadi!");
     }
 
+    public void filterInStock() {
+        try {
+            WebElement inStockCheckbox = wait.until(
+                    ExpectedConditions.elementToBeClickable(
+                            By.cssSelector("input#filter_in_stock")));
+            if (!inStockCheckbox.isSelected()) {
+                ((org.openqa.selenium.JavascriptExecutor) driver)
+                        .executeScript("arguments[0].click();", inStockCheckbox);
+                System.out.println("In stock filter applied!");
+                Thread.sleep(2000); // Sayfanın yenilenmesini bekle
+            }
+        } catch (Exception e) {
+            System.out.println("filterInStock error: " + e.getMessage());
+        }
+    }
+
     public void sortBy(String optionText) {
         wait.until(ExpectedConditions.elementToBeClickable(sortDropdown));
         WebElement firstItem = driver.findElement(By.cssSelector("div.ky-product"));
@@ -96,14 +112,24 @@ public class SearchResultsPage extends BasePage {
     public boolean isSortedByPriceAscending() {
         try {
             wait.until(ExpectedConditions.visibilityOfAllElements(searchResults));
-            List<WebElement> prices = driver.findElements(
-                    By.cssSelector("div.ky-product span.ky-product-price.ky-product-sell-price")
-            );
-            if (prices.size() < 2) return true;
+            if (searchResults.size() < 2) return true;
 
-            double firstPrice = parsePrice(prices.get(0).getText());
-            double secondPrice = parsePrice(prices.get(1).getText());
-            System.out.println("First: " + firstPrice + " Second: " + secondPrice);
+            WebElement firstProduct = searchResults.get(0);
+            WebElement secondProduct = searchResults.get(1);
+
+            String firstName = firstProduct.findElement(By.cssSelector("span.ky-product-title")).getText();
+            String firstPriceText = firstProduct.findElement(By.cssSelector("span.ky-product-price.ky-product-sell-price")).getText();
+            double firstPrice = parsePrice(firstPriceText);
+
+            String secondName = secondProduct.findElement(By.cssSelector("span.ky-product-title")).getText();
+            String secondPriceText = secondProduct.findElement(By.cssSelector("span.ky-product-price.ky-product-sell-price")).getText();
+            double secondPrice = parsePrice(secondPriceText);
+
+            String logMsg = String.format("Karsilastirilan 1. Kitap: '%s' (%.2f TL) <= 2. Kitap: '%s' (%.2f TL)", 
+                                          firstName, firstPrice, secondName, secondPrice);
+            System.out.println(logMsg);
+            io.qameta.allure.Allure.step(logMsg);
+
             return firstPrice <= secondPrice;
         } catch (Exception e) {
             System.out.println("isSortedByPriceAscending error: " + e.getMessage());

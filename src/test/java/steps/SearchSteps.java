@@ -58,6 +58,12 @@ public class SearchSteps {
         Assert.assertTrue(detailPage.isInStock(), "Availability status is not displayed!");
     }
 
+    @When("I filter by in stock items")
+    public void iFilterByInStockItems() {
+        searchResultsPage = new SearchResultsPage(DriverManager.getDriver());
+        searchResultsPage.filterInStock();
+    }
+
     @When("I sort by {string}")
     public void iSortBy(String option) {
         searchResultsPage = new SearchResultsPage(DriverManager.getDriver());

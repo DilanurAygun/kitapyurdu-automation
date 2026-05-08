@@ -16,7 +16,7 @@ public class Hooks {
             java.nio.file.Files.createDirectories(java.nio.file.Paths.get("allure-results"));
             java.nio.file.Files.writeString(
                 java.nio.file.Paths.get("allure-results/environment.properties"),
-                "Browser=Chrome\nOS=Windows 11\nProject=Kitapyurdu Automation\nTeam=Tugba & Dilanur\nTest_Type=UI Automation");
+                "Browser=Chrome\nOS=Windows 11\nProject=Kitapyurdu Automation\nTeam=Tuba & Dilanur\nTest_Type=UI Automation");
             
             java.nio.file.Files.writeString(
                 java.nio.file.Paths.get("allure-results/categories.json"),
