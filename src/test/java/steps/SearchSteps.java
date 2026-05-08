@@ -41,6 +41,13 @@ public class SearchSteps {
         detailPage = new ProductDetailPage(DriverManager.getDriver());
     }
 
+    @When("I click on the first discounted result")
+    public void iClickOnFirstDiscountedResult() {
+        searchResultsPage = new SearchResultsPage(DriverManager.getDriver());
+        searchResultsPage.clickFirstDiscountedResult();
+        detailPage = new ProductDetailPage(DriverManager.getDriver());
+    }
+
     @Then("the product price should be displayed")
     public void productPriceShouldBeDisplayed() {
         Assert.assertTrue(detailPage.isPriceDisplayed(), "Price is not displayed!");
@@ -55,6 +62,12 @@ public class SearchSteps {
     public void iSortBy(String option) {
         searchResultsPage = new SearchResultsPage(DriverManager.getDriver());
         searchResultsPage.sortBy(option);
+    }
+
+    @When("I filter by {string}")
+    public void iFilterBy(String filterText) {
+        searchResultsPage = new SearchResultsPage(DriverManager.getDriver());
+        searchResultsPage.filterByText(filterText);
     }
 
     @Then("results should be sorted by price ascending")
@@ -206,5 +219,48 @@ public class SearchSteps {
         System.out.println("Actual total: " + actualTotal);
         Assert.assertEquals(actualTotal, expectedTotal, 0.01,
                 "Basket total mismatch! Expected: " + expectedTotal + " Actual: " + actualTotal);
+    }
+
+    @When("I search for a keyword with {int} characters")
+    public void iSearchForKeywordWithCharacters(int length) {
+        homePage = new HomePage(DriverManager.getDriver());
+        StringBuilder longKeyword = new StringBuilder();
+        for (int i = 0; i < length; i++) {
+            longKeyword.append("a");
+        }
+        homePage.searchFor(longKeyword.toString());
+        searchResultsPage = new SearchResultsPage(DriverManager.getDriver());
+    }
+
+    @Then("a validation message for maximum length should be displayed")
+    public void aValidationMessageForMaximumLengthShouldBeDisplayed() {
+        // We assert that the site SHOULD have a max length validation message.
+        // Since Kitapyurdu does not validate this properly and just searches,
+        // this test will naturally FAIL, which is the intended demonstration of a bug!
+        boolean isValidationShown = false;
+        try {
+            // Trying to find any common validation message element
+            isValidationShown = searchResultsPage.noResultsMessageDisplayed() && 
+                DriverManager.getDriver().getPageSource().contains("çok uzun");
+        } catch (Exception e) {
+            isValidationShown = false;
+        }
+        
+        Assert.assertTrue(isValidationShown, 
+            "BUG DETECTED: Uygulama cok uzun (300+ karakter) arama kelimelerini dogrulamadan kabul ediyor! " +
+            "Beklenen: 'Arama kelimesi cok uzun' tarzi bir uyari gosterilmesiydi.");
+    }
+
+    @When("I enter {string} as quantity")
+    public void iEnterAsQuantity(String qty) {
+        basketPage.updateQuantity(qty);
+    }
+
+    @Then("the basket should show an error message for invalid quantity")
+    public void theBasketShouldShowAnErrorMessageForInvalidQuantity() {
+        boolean isErrorShown = basketPage.isQuantityErrorMessageDisplayed();
+        Assert.assertTrue(isErrorShown,
+            "BUG DETECTED: Sepet miktari olarak gecersiz/negatif bir deger (-1) girilmesine ragmen " +
+            "sistem kullaniciyi duzgun bir hata mesajiyla uyarmadi. Gecersiz miktar islemi yonetilemiyor!");
     }
 }

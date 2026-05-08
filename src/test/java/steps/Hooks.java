@@ -9,26 +9,30 @@ import org.openqa.selenium.TakesScreenshot;
 
 public class Hooks {
 
+    @io.cucumber.java.BeforeAll
+    public static void beforeAll() {
+        try {
+            // Allure raporu icin ortam ve kategori bilgilerini otomatik olustur
+            java.nio.file.Files.createDirectories(java.nio.file.Paths.get("allure-results"));
+            java.nio.file.Files.writeString(
+                java.nio.file.Paths.get("allure-results/environment.properties"),
+                "Browser=Chrome\nOS=Windows 11\nProject=Kitapyurdu Automation\nTeam=Tugba & Dilanur\nTest_Type=UI Automation");
+            
+            java.nio.file.Files.writeString(
+                java.nio.file.Paths.get("allure-results/categories.json"),
+                "[\n  {\n    \"name\": \"Gercek Sistem Aciklari (Bugs)\",\n    \"matchedStatuses\": [\"failed\"]\n  },\n  {\n    \"name\": \"Bozuk/Eksik Kod Hatalari\",\n    \"matchedStatuses\": [\"broken\"]\n  }\n]");
+                
+            java.nio.file.Files.writeString(
+                java.nio.file.Paths.get("allure-results/executor.json"),
+                "{\n  \"name\": \"Maven\",\n  \"type\": \"maven\",\n  \"buildName\": \"Kitapyurdu-Tests-Run\",\n  \"buildUrl\": \"http://localhost\"\n}");
+        } catch (Exception e) {
+            System.out.println("Allure configuration failed: " + e.getMessage());
+        }
+    }
+
     @Before
     public void setUp() {
         DriverManager.getDriver();
-        dismissCookiePopup();
-    }
-
-    private void dismissCookiePopup() {
-        try {
-            org.openqa.selenium.support.ui.WebDriverWait wait =
-                    new org.openqa.selenium.support.ui.WebDriverWait(
-                            DriverManager.getDriver(), java.time.Duration.ofSeconds(5));
-            org.openqa.selenium.WebElement rejectButton = wait.until(
-                    org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable(
-                            org.openqa.selenium.By.cssSelector("div#cookiescript_reject")));
-            rejectButton.click();
-            System.out.println("Cookie popup rejected!");
-            Thread.sleep(500);
-        } catch (Exception e) {
-            System.out.println("No cookie popup: " + e.getMessage());
-        }
     }
 
     @AfterStep

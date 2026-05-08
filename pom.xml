@@ -64,7 +64,31 @@
         <version>3.2.5</version>
         <configuration>
           <argLine>-Duser.language=en -Duser.country=US</argLine>
+          <testFailureIgnore>true</testFailureIgnore>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>3.1.0</version>
+        <executions>
+          <execution>
+            <id>serve-allure</id>
+            <phase>test</phase>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+            <configuration>
+              <executable>npx</executable>
+              <arguments>
+                <argument>--yes</argument>
+                <argument>allure-commandline</argument>
+                <argument>serve</argument>
+                <argument>allure-results</argument>
+              </arguments>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>

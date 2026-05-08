@@ -14,12 +14,14 @@ public class BasketPage extends BasePage {
         // JavaScript ile sepet ikonuna tıkla
         WebElement cartIcon = wait.until(ExpectedConditions.presenceOfElementLocated(
                 By.cssSelector("div#cart")));
+        highlightAndScroll(cartIcon);
         ((org.openqa.selenium.JavascriptExecutor) driver)
                 .executeScript("arguments[0].click();", cartIcon);
 
         // Sepete Git butonuna tıkla
         WebElement goToCartButton = wait.until(ExpectedConditions.elementToBeClickable(
                 By.cssSelector("a#js-cart")));
+        highlightAndScroll(goToCartButton);
         ((org.openqa.selenium.JavascriptExecutor) driver)
                 .executeScript("arguments[0].click();", goToCartButton);
 
@@ -58,9 +60,38 @@ public class BasketPage extends BasePage {
     public double getBasketTotal() {
         WebElement total = wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.cssSelector("div#cart-nav-total")));
+        highlightAndScroll(total);
         String text = total.getText().trim();
         System.out.println("Basket total text: " + text);
         return parsePrice(text);
+    }
+
+    public void updateQuantity(String qty) {
+        WebElement qtyInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.cssSelector("form input[name='quantity']")));
+        highlightAndScroll(qtyInput);
+        qtyInput.clear();
+        qtyInput.sendKeys(qty);
+        
+        WebElement refreshBtn = driver.findElement(By.cssSelector("i.fa-refresh, i.fa-sync, i[class*='update']"));
+        highlightAndScroll(refreshBtn);
+        refreshBtn.click();
+        
+        try { Thread.sleep(2000); } catch (Exception e) {}
+    }
+
+    public boolean isQuantityErrorMessageDisplayed() {
+        // Sepette geçersiz bir miktar (-1 vb.) girildiğinde, düzgün bir e-ticaret sitesi hata göstermelidir.
+        // Ancak Kitapyurdu muhtemelen ya "0" yapacak ya hata vermeyecek ya da görmezden gelecektir.
+        // Biz burada sitenin bir uyarı fırlatmasını bekliyoruz.
+        try {
+            WebElement errorMsg = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                    By.cssSelector("div.alert-danger, span.error, div[class*='error']")));
+            highlightAndScroll(errorMsg);
+            return errorMsg.isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     private double parsePrice(String priceText) {

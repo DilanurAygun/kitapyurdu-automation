@@ -43,13 +43,16 @@ public class ProductDetailPage extends BasePage {
     public boolean hasDiscountedPrice() {
         try {
             // Orijinal fiyat (üstü çizili)
-            WebElement originalPrice = driver.findElement(
+            WebElement originalPrice = wait.until(ExpectedConditions.visibilityOfElementLocated(
                     org.openqa.selenium.By.cssSelector(
-                            "span.ky-product-price.ky-product-list-price, span[class*='list-price']"));
+                            "span.ky-product-price.ky-product-list-price, span[class*='list-price']")));
+            highlightAndScroll(originalPrice);
+            
             // İndirimli fiyat
             WebElement sellPrice = driver.findElement(
                     org.openqa.selenium.By.cssSelector(
                             "span.ky-product-price.ky-product-sell-price, span[class*='sell-price']"));
+            highlightAndScroll(sellPrice);
 
             double original = parsePrice(originalPrice.getText());
             double discounted = parsePrice(sellPrice.getText());
@@ -58,8 +61,8 @@ public class ProductDetailPage extends BasePage {
             return discounted < original;
         } catch (Exception e) {
             System.out.println("hasDiscountedPrice error: " + e.getMessage());
-            // İndirim yoksa test geçsin — her üründe indirim olmayabilir
-            return true;
+            // Artik "Indirim yoksa test gecsin" demiyoruz, hata firlatiyoruz
+            throw new RuntimeException("Urun detay sayfasinda indirimli (ustu cizili) fiyat bulunamadi!");
         }
     }
 
