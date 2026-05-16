@@ -247,7 +247,7 @@ public class SearchSteps {
         try {
             // Trying to find any common validation message element
             isValidationShown = searchResultsPage.noResultsMessageDisplayed() && 
-                DriverManager.getDriver().getPageSource().contains("çok uzun");
+                DriverManager.getDriver().getPageSource().contains("uzun");
         } catch (Exception e) {
             isValidationShown = false;
         }

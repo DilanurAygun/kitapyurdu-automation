@@ -3,7 +3,7 @@
 Bu proje, **Kitapyurdu** e-ticaret web sitesinin temel fonksiyonlarını test etmek için geliştirilmiş kurumsal standartlarda bir **Test Otomasyon Framework'üdür**. 
 
 Testler, sektörün en çok tercih edilen araçları olan **Selenium, Cucumber (BDD), TestNG, Maven ve Allure Raporlama** araçları kullanılarak Page Object Model (POM) tasarım desenine göre yazılmıştır.
-
+Bu proje 212010020049 numaralı Zeynep Tuba Başar ve 212010020111 numaralı Dilanur Aygün tarafından yapılmıştır.
 ---
 
 ## 🛠️ Kullanılan Teknolojiler ve Mimari

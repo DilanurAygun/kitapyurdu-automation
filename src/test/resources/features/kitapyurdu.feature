@@ -55,11 +55,10 @@ Feature: Kitapyurdu Website Tests
     And I click on the first result
     Then the product should show stock status
 
-  @test
   Scenario: SORT-01 Sort results by price ascending
     Given I open Kitapyurdu homepage
     When I search for "Biyografi"
-    And I filter by in stock items
+    And I filter by "Stoktakiler"
     And I sort by "Ucuzdan Pahalıya"
     Then results should be sorted by price ascending
 
